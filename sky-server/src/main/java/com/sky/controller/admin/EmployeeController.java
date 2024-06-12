@@ -102,4 +102,19 @@ public class EmployeeController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 启用与禁用员工账号
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("status/{status}")
+    @ApiOperation("启用与禁用员工账号")
+    public Result updateEmployeeStatus(@PathVariable Integer status, Long id) {
+        log.info("启用与禁用员工账号: {}, {}", status, id);
+
+        employeeService.updateEmployeeStatus(status, id);
+        return Result.success();
+    }
+
 }
