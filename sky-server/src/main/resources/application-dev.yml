@@ -12,3 +12,7 @@ sky:
     region: us-east-1
     s3:
       bucketName: rainaug
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
