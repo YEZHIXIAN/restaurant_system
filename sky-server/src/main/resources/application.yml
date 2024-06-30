@@ -41,6 +41,13 @@ sky:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+    # 设置jwt签名加密时使用的秘钥
+    user-secret-key: itheima
+    # 设置jwt过期时间
+    user-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    user-token-name: authentication
+
   aws:
     accessKeyId: ${sky.aws.accessKeyId}
     secretKey: ${sky.aws.secretKey}
@@ -48,4 +55,6 @@ sky:
     s3:
       bucketName: ${sky.aws.s3.bucketName}
 
-
+  wechat:
+    appid: ${sky.wechat.appid}
+    secret: ${sky.wechat.secret}
