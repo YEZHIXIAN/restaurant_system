@@ -18,6 +18,7 @@ public class ShopController {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
     /**
      * 设置店铺营业状态
      * @param status

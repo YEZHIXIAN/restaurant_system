@@ -10,9 +10,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 菜品管理
@@ -27,6 +31,9 @@ public class DishController {
     @Autowired
     private DishService dishService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     /**
      * 新增菜品
      * @param dishDTO
@@ -34,9 +41,11 @@ public class DishController {
      */
     @PostMapping
     @ApiOperation("新增菜品")
+    @CacheEvict(cacheNames = "dishCache", key = "#dishDTO.categoryId")
     public Result<String> save(@RequestBody DishDTO dishDTO) {
         log.info("新增菜品: {}", dishDTO);
         dishService.saveWithFlavor(dishDTO);
+
         return Result.success();
     }
 
@@ -59,9 +68,11 @@ public class DishController {
      * @return
      */
     @DeleteMapping
+    @CacheEvict(cacheNames = "dishCache", allEntries = true)
     public Result<String> delete(@RequestParam List<Long> ids) {
         log.info("菜品批量删除: {}", ids);
         dishService.deleteBatch(ids);
+
         return Result.success();
     }
 
@@ -85,9 +96,12 @@ public class DishController {
      */
     @PutMapping
     @ApiOperation("修改菜品")
+    @CacheEvict(cacheNames = "dishCache", allEntries = true)
     public Result<String> update(@RequestBody DishDTO dishDTO) {
         log.info("修改菜品: {}", dishDTO);
         dishService.updateWithFlavor(dishDTO);
+
+
         return Result.success();
     }
 
@@ -99,9 +113,13 @@ public class DishController {
      */
     @PostMapping("/status/{status}")
     @ApiOperation("菜品起售与停售")
+    @CacheEvict(cacheNames = "dishCache", allEntries = true)
     public Result<String> updateDishStatus(@PathVariable Integer status, Long id) {
         log.info("菜品起售与停售: {}, {}", status, id);
         dishService.updateDishStatus(status, id);
+
         return Result.success();
     }
+
+
 }
