@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/admin/category")
 @Api(tags = "分类相关接口")
 @Slf4j
-public class  CategoryController {
+public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;

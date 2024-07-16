@@ -12,43 +12,49 @@ import java.util.List;
 public interface SetmealService {
 
     /**
-     * 新增套餐
+     * 新增套餐，同时需要保存套餐和菜品的关联关系
+     *
      * @param setmealDTO
      */
-    void save(SetmealDTO setmealDTO);
+    void saveWithDish(SetmealDTO setmealDTO);
 
     /**
-     * 根据id查询套餐
-     * @param id
-     * @return
-     */
-    SetmealVO getById(Long id);
-
-    /**
-     * 套餐分页查询
+     * 分页查询
+     *
      * @param setmealPageQueryDTO
      * @return
      */
-    PageResult setmealPageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
-
-    /**
-     * 修改套餐
-     * @param setmealDTO
-     */
-    void update(SetmealDTO setmealDTO);
+    PageResult pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
 
     /**
      * 批量删除套餐
+     *
      * @param ids
      */
     void deleteBatch(List<Long> ids);
 
     /**
-     * 起售停售套餐
+     * 根据id查询套餐和关联的菜品数据
+     *
+     * @param id
+     * @return
+     */
+    SetmealVO getByIdWithDish(Long id);
+
+    /**
+     * 修改套餐
+     *
+     * @param setmealDTO
+     */
+    void update(SetmealDTO setmealDTO);
+
+    /**
+     * 套餐起售、停售
+     *
      * @param status
      * @param id
      */
-    void updateSetmealStatus(Integer status, Long id);
+    void startOrStop(Integer status, Long id);
 
     /**
      * 条件查询
