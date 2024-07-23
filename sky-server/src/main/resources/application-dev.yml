@@ -6,16 +6,16 @@ sky:
     database: sky_take_out
     username: root
     password: 123456
-  aws:
-    accessKeyId: AKIA6GBMGC4IECY5SZHL
-    secretKey: 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
-    region: us-east-1
-    s3:
-      bucketName: rainaug
+#  aws:
+#    accessKeyId:
+#    secretKey:
+#    region:
+#    s3:
+#      bucketName:
   redis:
     host: localhost
     port: 6379
     database: 0
-  wechat:
-    appid: wxf3013ae0c49cab53
-    secret: d4c4a1fa474b4ebd14c79f519382f8a2
+#  wechat:
+#    appid:
+#    secret:
